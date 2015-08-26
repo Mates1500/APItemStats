@@ -28,7 +28,7 @@ $itemsrecorded = [
 		1334, // <-^ ionian boots enchantments
 		3151, //liandry's torment
 		3100, //lich bane
-		3258, //luden's echo
+		3285, //luden's echo
 		3041, //mejai's soulstealer
 		3165, //morellonomicon
 		3115, //nashor's tooth

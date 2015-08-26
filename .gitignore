@@ -44,3 +44,6 @@ Temporary Items
 
 #notepad++ backup files
 *.bak
+
+#apikey.php so it doesn't bother me wanting to update
+apikey.php

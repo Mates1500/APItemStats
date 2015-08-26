@@ -1,13 +1,30 @@
 <?php
 	require("itemsrecorded.php");
+	require("patchesrecorded.php");
 	foreach($itemsrecorded as $ir)
 	{
-		$img = "images/$ir.png";
-		if(!file_exists($img))
+		foreach($patchesrecorded as $pr)
 		{
-			$url = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/$ir.png";
-			fopen($img, "w");
-			file_put_contents($img, file_get_contents($url));
+			$continue = true;
+			if($ir[1] != "both")
+			{
+				if($ir[1] != $pr)
+				{
+					$continue = false;
+				}
+			}
+			if($continue)
+			{
+				$irname = $ir[0];
+				$img = "images/$irname.png";
+				if(!file_exists($img))
+				{
+					$url = "http://ddragon.leagueoflegends.com/cdn/$pr/img/item/$irname.png";
+					fopen($img, "w");
+					file_put_contents($img, file_get_contents($url));
+				}
+			}
+			
 		}
 	}
 	

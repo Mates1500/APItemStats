@@ -30,7 +30,7 @@ require "regionsrecorded.php";
 foreach($regionsrecorded as $rr)
 {
 	$reg = $rr[0];
-	$query = $mysqli->query("SELECT * FROM `scannedmatches` WHERE `region` = '$reg'");
+	$query = $mysqli->query("SELECT * FROM `scannedmatches` WHERE `region` = '$reg' AND `useful` = 1");
 	if($query)
 	{
 		$count = $query->num_rows;

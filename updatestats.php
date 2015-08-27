@@ -7,7 +7,9 @@
 		require("itemsrecorded.php");
 		require_once("connect.php");
 		set_time_limit(36000);
+		date_default_timezone_set("Europe/Prague");
 		$matchid = array();
+		$numberofregions = 0;
 		if(isset($_POST["matches"]))
 		{
 		echo "posted through form<br>";
@@ -19,16 +21,22 @@
 				$regionsrecorded[$key][1] = false;
 				echo $rr[0]." was disabled<br>";
 			}
+			else
+			{
+				$numberofregions++;
+			}
 			$matchestodownloadineachregion = $_POST["matches"];
 		}
 		}
 		else
 		{
+			$numberofregions = 10;
 			$matchestodownloadineachregion = 5;
 		}
 
 		$totalplayers = 0;
-		
+		$totalmatchestodownload = $numberofregions*$matchestodownloadineachregion*2; //times patches
+		$matchesdownloadprogress = 0;
 		$gamemode = "RANKED_SOLO";
 		$itemsinfo = array();
 		$ij = 0; //ij so it's not confused with any other loop
@@ -94,16 +102,20 @@
 		$objectvalidated = false; //in case the http request goes wrong	
 		$deltatime = microtime(true) - $starttime - $prevdeltatime;
 		$prevdeltatime += $deltatime;
+		$useful = 1;
 		require("apikey.php");
 		$jsonurl = "https://$region.api.pvp.net/api/lol/$region/v2.2/match/$m?includeTimeline=true&api_key=$apikey";
 		$json = requestJsonTry($jsonurl, 1, 5);
+		if(!$json){
+			$useful = 0;
+		}
 		$secondrequestsremaining--;
 		$secondtimelimit-=$deltatime;
-		echo "deltatime is $deltatime<br>";
+		//echo "deltatime is $deltatime<br>";
 		$minuterequestsremaining--;
 		$minutetimelimit-=$deltatime;
 		$obj = json_decode($json, true);
-		echo "finished requesting an object<br>";
+		//echo "finished requesting an object<br>";
 		/*ob_flush();
 		flush();*/
 		foreach($obj["participants"] as $player)
@@ -188,7 +200,7 @@
 					$query2 = $mysqli->query("UPDATE `itemstats` SET `popularity` = $popularity $cond");
 					if($query2)
 					{
-						echo "Successfully updated $id popularity to $popularity<br>";
+					//	echo "Successfully updated $id popularity to $popularity<br>";
 					}
 					else
 					{
@@ -202,7 +214,7 @@
 					$query2 = $mysqli->query("UPDATE `itemstats` SET `winrate` = $winrate $cond");
 					if($query2)
 						{
-							echo "Successfully updated $id winrate to $winrate<br>";
+						//	echo "Successfully updated $id winrate to $winrate<br>";
 						}
 						else
 						{
@@ -231,7 +243,7 @@
 					$query2 = $mysqli->query("UPDATE `itemstats` SET `purchase_timestamps` = '$jsontimestamps' $cond");
 					if($query2)
 					{
-						echo "Successfully updated timestamps for item $id<br>";
+					//	echo "Successfully updated timestamps for item $id<br>";
 					}
 					else
 					{
@@ -242,11 +254,17 @@
 				}
 				}
 			}
+			$matchesdownloadprogress++;
 		}
-		$query = $mysqli->query("INSERT INTO `scannedmatches` (`match_id`, `region`) VALUES ($m, '$region')");
+		$query = $mysqli->query("INSERT INTO `scannedmatches` (`match_id`, `region`, `useful`) VALUES ($m, '$region', $useful)");
 			if($query)
 			{
-				echo "Match $m, region $region, patch $pr marked as read to the db successfully<br>";
+				echo date("H:i:s")." - ";
+				if($useful == 0)
+				{
+					echo "Marked as USELESS - ";
+				}
+				echo "Match $m, region $region, patch $pr marked as read to the db successfully. Progress $matchesdownloadprogress/$totalmatchestodownload<br>";
 			}
 			else
 			{
@@ -346,11 +364,11 @@
 	
 	function requestJsonTry($url, $tries, $trylimit)
 	{
-		echo "requesting file \t";
+		//echo "requesting file \t";
 		$js = file_get_contents($url);
 		if($js)
 		{
-			echo "request complete <br>";
+		//	echo "request complete <br>";
 			return $js;
 		}
 		else

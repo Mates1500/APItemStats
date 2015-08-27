@@ -2,11 +2,11 @@
 <?php
 		/*ob_end_flush();
 		ob_start();*/
-		require("patchesrecorded.php");
-		require("regionsrecorded.php");
-		require("itemsrecorded.php");
+		require_once("patchesrecorded.php");
+		require_once("regionsrecorded.php");
+		require_once("itemsrecorded.php");
 		require_once("connect.php");
-		set_time_limit(36000);
+		set_time_limit(360000);
 		date_default_timezone_set("Europe/Prague");
 		$matchid = array();
 		$numberofregions = 0;
@@ -103,7 +103,7 @@
 		$deltatime = microtime(true) - $starttime - $prevdeltatime;
 		$prevdeltatime += $deltatime;
 		$useful = 1;
-		require("apikey.php");
+		require_once("apikey.php");
 		$jsonurl = "https://$region.api.pvp.net/api/lol/$region/v2.2/match/$m?includeTimeline=true&api_key=$apikey";
 		$json = requestJsonTry($jsonurl, 1, 5);
 		if(!$json){
@@ -127,8 +127,6 @@
 				{
 					if($player["stats"]["item$i"] == $if[0])
 					{
-						$id = $if[0];
-						
 						if($player["stats"]["winner"])
 						{
 							$itemsinfo[$key][2]++;
@@ -227,11 +225,10 @@
 				}
 				if(isset($if[4][0])) //timestamps
 				{
-					if($obj->purchase_timestamps !=0)
+					$timestamps = json_decode($obj->purchase_timestamps);
+					if($timestamps[0] == 0)
 					{
-						$timestamps = json_decode($obj->purchase_timestamps);
-					}
-					{
+						unset($timestamps);
 						$timestamps = array();
 					}
 					foreach($if[4] as $t)
@@ -243,7 +240,9 @@
 					$query2 = $mysqli->query("UPDATE `itemstats` SET `purchase_timestamps` = '$jsontimestamps' $cond");
 					if($query2)
 					{
-					//	echo "Successfully updated timestamps for item $id<br>";
+					/*	echo "Successfully updated timestamps for item $id, sending";
+						print_r($timestamps);
+						echo "<br>";*/
 					}
 					else
 					{
@@ -256,7 +255,7 @@
 			}
 			$matchesdownloadprogress++;
 		}
-		$query = $mysqli->query("INSERT INTO `scannedmatches` (`match_id`, `region`, `useful`) VALUES ($m, '$region', $useful)");
+		$query = $mysqli->query("INSERT INTO `scannedmatches` (`match_id`, `region`, `useful`, `patch`) VALUES ($m, '$region', $useful, '$pr')");
 			if($query)
 			{
 				echo date("H:i:s")." - ";

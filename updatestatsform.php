@@ -39,6 +39,21 @@ foreach($regionsrecorded as $rr)
 }
 ?>
 </h3>
+<h2><span class="label alert-danger">Including useless matches</span></h2>
+<h3>
+<?php
+foreach($regionsrecorded as $rr)
+{
+	$reg = $rr[0];
+	$query = $mysqli->query("SELECT * FROM `scannedmatches` WHERE `region` = '$reg'");
+	if($query)
+	{
+		$count = $query->num_rows;
+		echo "<span class=\"label label-warning text-uppercase\" style=\"margin-right:8px;\">$reg: $count</span>";
+	}
+}
+?>
+</h3>
 </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-2.1.4.min.js"></script>

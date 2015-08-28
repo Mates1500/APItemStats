@@ -180,7 +180,7 @@
 </nav>
 <div class = "container">
 <div class="text-center">
-<img src="images/splash_small.png">
+<img src="images/splash_small.png" class="img-responsive" style="display:inline-block;">
 <div class="page-header"><h1>AP Item Usage between 5.11 and 5.14</h1></div>
 <div id="table_div">
 </div>

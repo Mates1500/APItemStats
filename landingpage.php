@@ -9,6 +9,12 @@
 	<script src="js/jquery.cookie.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/selectall.js"></script>
+	<style>
+	.label
+	{
+			
+	}
+	</style>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	  <script type="text/javascript">
       google.load("visualization", "1.1", {packages:["table"]});
@@ -158,7 +164,28 @@
 <div class="text-center"><div class="page-header"><h1>AP Item Usage between 5.11 and 5.14</h1></div>
 <div id="table_div">
 </div>
+</div>
+</div>
+<div class="jumbotron text-center" style="background-color: #008cba !important; margin: 35px 0 0 0; padding-top: 20px; padding-bottom: 20px">
+<div class="content">
+<h2 style="margin-bottom:26px;"><span class="label label-info">Count of relevant matches in the DB</span></h2>
+<h3 style="display:block;">
+<?php
+require_once("connect.php");
+require_once("regionsrecorded.php");
 
+foreach($regionsrecorded as $rr)
+{
+	$reg = $rr[0];
+	$query = $mysqli->query("SELECT * FROM `scannedmatches` WHERE `region` = '$reg' AND `useful` = 1");
+	if($query)
+	{
+		$count = $query->num_rows;
+		echo "<span class=\"label label-success text-uppercase\" style=\"margin-right:8px; margin-bottom:8px;\">$reg: $count</span>";
+	}
+}
+?>
+</h3>
 </div>
 </div>
 

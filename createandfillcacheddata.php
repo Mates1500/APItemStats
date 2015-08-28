@@ -67,7 +67,7 @@ foreach($itemsrecorded as $ir)
 								}
 								$avgpurchase = $timestampsadded/count($timestamps);
 								$medpurchase = $timestamps[count($timestamps)/2];
-								$query4 = $mysqli->query("UPDATE `cacheddata` SET `winrate` = $winratepercent, `pickrate` = $popularitypercent, `avgpurchase` = $avgpurchase, `medpurchase` = $medpurchase WHERE `item_id` = $item and `region` = '$region'");
+								$query4 = $mysqli->query("UPDATE `cacheddata` SET `winrate` = $winratepercent, `pickrate` = $popularitypercent, `avgpurchase` = $avgpurchase, `medpurchase` = $medpurchase WHERE `item_id` = $item AND `region` = '$region' AND `patch` = '$patch'");
 								if($query4)
 								{
 									echo "Successfully updated $item, region $region winrate to $winratepercent, pickrate to $popularitypercent, avgpurchase to $avgpurchase, medpurchase to $medpurchase<br>";
@@ -98,4 +98,5 @@ foreach($itemsrecorded as $ir)
 		}
 	}
 }
+echo "FINISHED<br>";
 ?>

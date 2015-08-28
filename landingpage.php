@@ -132,7 +132,7 @@
 					 
 				  }
 				table.draw(data, {showRowNumber: false, width: '100%', height: '100%', allowHtml: true, sort: 'disable'});  
-				console.log(obj);
+				//console.log(obj); //for debugging
 		 }
 		 
 		 function secondsTimeSpanToMS(s) {

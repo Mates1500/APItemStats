@@ -22,9 +22,15 @@
 			{
 				$irname = $ir[0];
 				$img = "images/$irname.png";
+				if($pr == "5.11.1" && $irname == 3050)
+				{
+					$img = "images/$irname"."_z.png"; //zeke's herald, different icon
+					echo $img."<br>";
+				}
 				if(!file_exists($img))
 				{
 					$url = "http://ddragon.leagueoflegends.com/cdn/$pr/img/item/$irname.png";
+					
 					fopen($img, "w");
 					file_put_contents($img, file_get_contents($url));
 				}

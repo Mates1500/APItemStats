@@ -99,7 +99,15 @@ echo "var region = '".$_GET['region_pref']."';</script>";
 					popularitydata.push(Math.round(obj[i].pickrate * 1000) / 1000);
 					avgpurchasedata.push(Math.round(obj[i].avgpurchase * 1000) / 1000 / 1000);
 					medpurchasedata.push(Math.round(obj[i].medpurchase * 1000) / 1000 / 1000);
+					if(itemid == 3050 && i==0)
+					{
+						itemid+="_z"; //zeke's exception
+					}
 					$("span.item"+(i+1)+"desc").html('<img src="images/'+itemid+'.png"><br>'+obj[i].desc);
+					if(itemid == "3050_z" && i==0)
+					{
+						itemid = 3050;
+					}
 				}
 				
 				console.log(obj);

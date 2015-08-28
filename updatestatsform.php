@@ -18,7 +18,7 @@ if(isset($_POST["pw"]))
 	if(md5($_POST["pw"]) == $password)
 	{
 		echo "<form action=\"updatestats.php\" method=\"POST\">
-Number of matches <input name=\"matches\"><br>
+Number of matches for each region, each patch:<input name=\"matches\"><br>
 <span class=\"lead\">BR<input type=\"checkbox\" name=\"br\"> EUNE<input type=\"checkbox\" name=\"eune\"> EUW<input type=\"checkbox\" name=\"euw\"> KR<input type=\"checkbox\" name=\"kr\"> LAN<input type=\"checkbox\" name=\"lan\"> 
 LAS<input type=\"checkbox\" name=\"las\"> NA<input type=\"checkbox\" name=\"na\"> OCE<input type=\"checkbox\" name=\"oce\"> RU<input type=\"checkbox\" name=\"ru\"> TR<input type=\"checkbox\" name=\"tr\"> <br>
 Select All <input type=\"checkbox\" id=\"select_all\"></span><br>

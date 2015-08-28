@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title>AP Item Stats</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -166,7 +167,7 @@
 </div>
 </div>
 </div>
-<div class="jumbotron text-center" style="background-color: #008cba !important; margin: 35px 0 0 0; padding-top: 20px; padding-bottom: 20px">
+<footer class="footer text-center" style="background-color: #008cba !important; margin: 35px 0 0 0; padding-top: 20px; padding-bottom: 20px">
 <div class="content">
 <h2 style="margin-bottom:26px;"><span class="label label-info">Count of relevant matches in the DB</span></h2>
 <h3 style="display:block;">
@@ -187,7 +188,7 @@ foreach($regionsrecorded as $rr)
 ?>
 </h3>
 </div>
-</div>
+</footer>
 
 </body>
 </html>

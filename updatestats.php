@@ -1,7 +1,7 @@
 
 <?php
-		/*ob_end_flush();
-		ob_start();*/
+		//ob_end_flush();
+		//ob_start();
 		require_once("patchesrecorded.php");
 		require_once("regionsrecorded.php");
 		require_once("itemsrecorded.php");
@@ -279,7 +279,7 @@
 		{
 			if($secondtimelimit > 0)
 			{
-				echo "Second time limit reached, sleeping for $secondtimelimit seconds";
+				echo "Second time limit reached, sleeping for $secondtimelimit seconds<br>";
 				sleep($secondtimelimit);
 			}
 			$secondrequestsremaining = $secondrequestlimit;

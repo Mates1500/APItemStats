@@ -13,6 +13,7 @@ Once the user selects an item, the user is presented with 4 kinds of different g
 
 The **statistics tracked** by this app are
 - Both for **5.11 and 5.14**
+  - **Item Description** (so an item change between the patches is apparent) 
   - **Win rate** (number of matches won are stored in the database, divided by the number of valid matches from that region for % based result)
   - **Pick rate** (same as above)
   - **Average purchase time** (stored in the same ms format as Riot does, converted to mm:ss by javascript)
@@ -54,6 +55,8 @@ output_buffering = off
 
 ##Questions?
 Go ahead and ask on the issue tracker, currently I'm a little tired from working on this project for 4 days straight, so the project description might not be complete yet.
+
+Most of the code should be self-explanatory, hopefully. It's mostly just SQL queries over and over again, fetching, manipulating and adding data.
 
 ##Third party tools used in this project
 - [Riot Games API](https://developer.riotgames.com/) (you don't say?!)

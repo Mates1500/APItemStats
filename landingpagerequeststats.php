@@ -27,7 +27,7 @@ if($query)
 			
 			
 			$itemid = $obj->item_id;
-			$query2 = $mysqli->query("SELECT `winrate`, `pickrate`, `avgpurchase`, `medpurchase` FROM `cacheddata` WHERE `patch` = '$pr' AND `item_id` = $itemid$additional");
+			$query2 = $mysqli->query("SELECT `winrate`, `pickrate`, `avgpurchase`, `medpurchase`, `region` FROM `cacheddata` WHERE `patch` = '$pr' AND `item_id` = $itemid$additional");
 			if($query2)
 			{
 				
@@ -41,25 +41,44 @@ if($query)
 				$avgmcount = 0;
 				while($obj2 = $query2->fetch_object())
 				{
+					$reg = $obj2->region;
+					$relevance = 1;
+					if($additional == "")
+					{
+						if($relevance == 1)
+						{
+						$relevance = 0;
+						}
+						$query3 = $mysqli->query("SELECT * FROM `scannedmatches` WHERE `useful` = 1 and `region` = '$reg'");
+						if($query3)
+						{
+							$relevance = $query3 -> num_rows;
+						}
+						else
+						{
+							echo "Query3 error:".$mysqli->error."<br>";
+						}
+					}
 					if($obj2->winrate != 0)
 					{
-						$totalwinrate+=$obj2->winrate;
-						$wrcount++;
+						
+						$totalwinrate+=$obj2->winrate*$relevance;
+						$wrcount+=$relevance;
 					}
 					if($obj2->pickrate != 0)
 					{
-						$totalpickrate+=$obj2->pickrate;
-						$prcount++;
+						$totalpickrate+=$obj2->pickrate*$relevance;
+						$prcount+=$relevance;
 					}
 					if($obj2->avgpurchase != 0)
 					{
-						$totalavgpurchase+=$obj2->avgpurchase;
-						$avgpcount++;
+						$totalavgpurchase+=$obj2->avgpurchase*$relevance;
+						$avgpcount+=$relevance;
 					}
 					if($obj2->medpurchase != 0)
 					{
-						$totalmedpurchase+=$obj2->medpurchase;
-						$avgmcount++;
+						$totalmedpurchase+=$obj2->medpurchase*$relevance;
+						$avgmcount+=$relevance;
 					}
 					
 				}

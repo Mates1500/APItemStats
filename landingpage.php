@@ -6,6 +6,7 @@
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-2.1.4.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/jquery.cookie.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/selectall.js"></script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -53,15 +54,24 @@
 	<script type="text/javascript" language="javascript">
          $(document).ready(function() {
 			 var refpref = $("ul.navbar-nav > li.active").text().toLowerCase();
-				$("ul.navbar-nav > li").click(function()
-				{
+			 
+			 if($.cookie("region") != null)
+			 {
+				refpref=$.cookie("region");
+				$("ul.navbar-nav").children().removeClass("active");
+				$("ul.navbar-nav").children("li:contains('"+refpref.toUpperCase()+"')").addClass("active");
+			 }
+			 
+				$("ul.navbar-nav > li:not(:contains('Home'))").click(function()
+				{		
 					$("ul.navbar-nav").children().removeClass("active");
 					$(this).addClass("active");
 					refpref = $(this).text().toLowerCase();
+					$.cookie("region", refpref, {expires:7});
 					$.getJSON('landingpagerequeststats.php?region_pref='+refpref, function(d)
 			   {
 				   processJsonData(d, refpref);
-			   });
+					});;
 				})
 				
 			

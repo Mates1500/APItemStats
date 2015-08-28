@@ -11,6 +11,7 @@ echo "var region = '".$_GET['region_pref']."';</script>";
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-2.1.4.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/jquery.cookie.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/selectall.js"></script>
 	<script src="js/Chart.js"></script>
@@ -18,20 +19,30 @@ echo "var region = '".$_GET['region_pref']."';</script>";
 	var options = {};
          $(document).ready(function() {
 			 var refpref = $("ul.navbar-nav > li.active").text().toLowerCase();
-				$("ul.navbar-nav > li").click(function()
+			 
+				$("ul.navbar-nav > li:not(:contains('Home'))").click(function()
 				{
 					options = {animateRotate: false};
 					$("ul.navbar-nav").children().removeClass("active");
 					$(this).addClass("active");
 					refpref = $(this).text().toLowerCase();
+					$.cookie("region", refpref, {expires:7});
 					$.getJSON('itemdetailrequeststats.php?region_pref='+refpref+'&id='+itemid, function(d)
 			   {
 				   processJsonData(d);
-			   });
+					});;
 				})
 				
+				
+				
+			if(region!="")
+			{
+				$("ul.navbar-nav").children().removeClass("active");
+				$("ul.navbar-nav").children("li:contains('"+region.toUpperCase()+"')").addClass("active");
+			}
+				
 			
-               $.getJSON('itemdetailrequeststats.php?region_pref='+refpref+'&id='+itemid, function(d)
+               $.getJSON('itemdetailrequeststats.php?region_pref='+region+'&id='+itemid, function(d)
 			   {
 				   processJsonData(d);
 			   });

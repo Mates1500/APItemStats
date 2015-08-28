@@ -22,6 +22,11 @@ if(isset($_GET["region_pref"]))
 
 foreach($patchesrecorded as $pr)
 {
+	$additional = " AND `region` = '$refpref'";
+	if($refpref=="all")
+	{
+		$additional = "";
+	}
 	$query = $mysqli->query("SELECT `item_name`, `item_description` FROM `itemstats` WHERE `region` = '$refpref' AND `patch` = '$pr' AND `item_id` = $item_id");
 	if($query)
 	{
@@ -50,6 +55,7 @@ foreach($patchesrecorded as $pr)
 	}
 	
 }
+array_push($result_all, $refpref);
 echo json_encode($result_all);
 function divideOrZero($n1, $n2)
 {

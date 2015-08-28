@@ -42,7 +42,7 @@
 		var formatter;
       function drawTable() {
         data = new google.visualization.DataTable();
-		data.addColumn('string', 'Image');
+		data.addColumn('string', 'Icon');
         data.addColumn('string', 'Item');
         data.addColumn('string', 'WinRate 5.11');
         data.addColumn('string', 'WinRate 5.14');

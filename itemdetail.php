@@ -291,7 +291,7 @@ echo "var region = '".$_GET['region_pref']."';</script>";
 </div>
 </div>
 
-<footer class="footer text-center" style="background-color: #008cba !important; margin: 35px 0 0 0; padding-top: 20px; padding-bottom: 20px">
+<footer class="footer text-center" style="background-color: #008cba !important; margin: 35px 0 0 0; padding-top: 20px; padding-bottom: 40px">
 <div class="content">
 <h2 style="margin-bottom:26px;"><span class="label label-info">Count of relevant matches in the DB</span></h2>
 <h3 style="display:block;">
@@ -312,6 +312,8 @@ foreach($regionsrecorded as $rr)
 ?>
 </h3>
 <span class="label label-default">Made by Mates1500, 2015</span>
+<br>
+<a href="https://github.com/Mates1500/APItemStats" target="_blank" class="btn btn-default pull-right" style="margin-right:20px; margin-top:-20px">View project on Github</a>
 </div>
 </footer>
 

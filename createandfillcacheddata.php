@@ -3,7 +3,12 @@ require_once("connect.php");
 require_once("regionsrecorded.php");
 require_once("itemsrecorded.php");
 require_once("patchesrecorded.php");
+require_once("password.php");
 set_time_limit(3600);
+if(isset($_POST["pw"]))
+{
+if(md5($_POST["pw"]) == $password)
+{
 foreach($itemsrecorded as $ir)
 {
 	foreach($patchesrecorded as $pr)
@@ -99,4 +104,14 @@ foreach($itemsrecorded as $ir)
 	}
 }
 echo "FINISHED<br>";
+}
+else
+{
+	echo "Wrong pw<br><a href=\"createandfillcacheddata.php\">Back to Form</a><br>";
+}
+}
+else
+{
+	echo "<form method=\"POST\">Password:<input type=\"password\"name=\"pw\"><br><input type=\"submit\">";
+}
 ?>

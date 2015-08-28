@@ -227,6 +227,7 @@ echo "var region = '".$_GET['region_pref']."';</script>";
 <div class = "container">
 <div class="text-center"><div class="page-header"><h1>AP Item Usage between 5.11 and 5.14</h1></div>
 <div id="content">
+
 <div class="col-lg-6 item1">
 <h4><strong>5.11</strong></h4>
 <span class="item1desc">

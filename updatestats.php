@@ -6,10 +6,15 @@
 		require_once("regionsrecorded.php");
 		require_once("itemsrecorded.php");
 		require_once("connect.php");
+		require_once("password.php");
 		set_time_limit(360000);
 		date_default_timezone_set("Europe/Prague");
 		$matchid = array();
 		$numberofregions = 0;
+		if(isset($_POST["pw"]))
+		{
+		if($_POST["pw"] == $password)
+		{
 		if(isset($_POST["matches"]))
 		{
 		echo "posted through form<br>";
@@ -297,6 +302,16 @@
 		}
 		}
 		echo "FINISHED<br>";
+		}
+		else
+		{
+			echo "Wrong pw<br><a href=\"updatestatsform.php\">Back to Form</a><br>";
+		}
+		}
+		else
+		{
+			echo "You must access this subsite through <a href=\"updatestatsform.php\">this form</a><br>";
+		}
 		/*foreach($itemsinfo as $if)
 		{
 			if($if[2]!=0 || $if[3]!=0)

@@ -4,6 +4,7 @@ require_once("connect.php");
 require_once("itemsrecorded.php");
 require_once("patchesrecorded.php");
 require_once("regionsrecorded.php");
+require_once("exceptions.php");
 $query = $mysqli->query("SELECT `item_id`, `item_name` FROM `itemstats` WHERE `region` = 'eune' AND `patch` = '5.14.1'");
 $result_arr = array();
 $result_all = array();
@@ -24,9 +25,14 @@ if($query)
 			{
 				$additional = "";
 			}
-			
-			
 			$itemid = $obj->item_id;
+			foreach($exceptions as $e)
+			{
+				if($e[1] == $itemid && $pr == "5.11.1")
+				{
+					$itemid = $e[0];
+				}
+			}
 			$query2 = $mysqli->query("SELECT `winrate`, `pickrate`, `avgpurchase`, `medpurchase`, `region` FROM `cacheddata` WHERE `patch` = '$pr' AND `item_id` = $itemid$additional");
 			if($query2)
 			{

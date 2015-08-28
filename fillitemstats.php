@@ -4,8 +4,14 @@ require("itemsrecorded.php");
 require("regionsrecorded.php");
 require("patchesrecorded.php");
 require("apikey.php");
+require_once("password.php");
 set_time_limit(3600);
 
+if(isset($_POST["pw"]))
+{
+if(md5($_POST["pw"]) == $password)
+{
+echo "Started fetching data";
 foreach($itemsrecorded as $ir)
 {
 	foreach($regionsrecorded as $rr)
@@ -64,4 +70,14 @@ foreach($itemsrecorded as $ir)
 	}
 }
 echo "FINISHED!<br>";
+}
+else
+{
+	echo "Wrong pw<br><a href=\"fillitemstats.php\">Back to Form</a><br>";
+}
+}
+else
+{
+	echo "<form method=\"POST\">Password:<input type=\"password\"name=\"pw\"><br><input type=\"submit\">";
+}
 ?>

@@ -1,6 +1,11 @@
 <?php
 	require("itemsrecorded.php");
 	require("patchesrecorded.php");
+	require_once("password.php");
+	if(isset($_POST["pw"]))
+	{
+	if(md5($_POST["pw"]) == $password)
+	{
 	foreach($itemsrecorded as $ir)
 	{
 		foreach($patchesrecorded as $pr)
@@ -27,5 +32,15 @@
 			
 		}
 	}
-	
+	echo "finished!";
+	}
+	else
+	{
+		echo "wrong pw<br><a href=\"downloaditemimages.php\">Try again?</a>";
+	}
+	}
+	else
+	{
+		echo "<form method=\"POST\">Password:<input type=\"password\"name=\"pw\"><br><input type=\"submit\">";
+	}
 ?>

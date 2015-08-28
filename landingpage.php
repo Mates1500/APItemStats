@@ -70,9 +70,7 @@
         ]);*/
 
         table = new google.visualization.Table(document.getElementById('table_div'));
-		formatter = new google.visualization.ArrowFormat();
-		formatter.format(data, 3); 
-        table.draw(data, {showRowNumber: false, width: '100%', height: '100%', allowHtml: true});
+        table.draw(data, {showRowNumber: false, width: '100%', height: '100%', allowHtml: true, sort: 'disable'});
       }
     </script>
 	<script type="text/javascript" language="javascript">
@@ -133,7 +131,7 @@
 					  
 					 
 				  }
-				table.draw(data, {showRowNumber: false, width: '100%', height: '100%', allowHtml: true});  
+				table.draw(data, {showRowNumber: false, width: '100%', height: '100%', allowHtml: true, sort: 'disable'});  
 				console.log(obj);
 		 }
 		 

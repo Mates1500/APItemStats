@@ -46,7 +46,7 @@ foreach($itemsrecorded as $ir)
 						$name = $obj["name"];
 						$description = $obj["description"];
 						$name = $mysqli->real_escape_string($name);
-						$description = $mysqli->real_escape_string($description);
+						$description = $mysqli->real_escape_string($description); //apostrophes do not like being in SQL queries, let's "escape" that problem, now insert a Phreak pun here
 						$qstring = "INSERT INTO `itemstats`(`item_id`, `item_name`, `item_description`, `region`, `winrate`, `popularity`, `purchase_timestamps`, `patch`) VALUES($id, '$name', '$description', '$reg', 0, 0, '[0]', '$pr')";
 						$query = $mysqli->query($qstring);
 						if($query)

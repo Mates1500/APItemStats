@@ -5,9 +5,9 @@ require_once("itemsrecorded.php");
 require_once("patchesrecorded.php");
 require_once("regionsrecorded.php");
 require_once("exceptions.php");
-$query = $mysqli->query("SELECT `item_id`, `item_name` FROM `itemstats` WHERE `region` = 'eune' AND `patch` = '5.14.1'");
-$result_arr = array();
-$result_all = array();
+$query = $mysqli->query("SELECT `item_id`, `item_name` FROM `itemstats` WHERE `region` = 'eune' AND `patch` = '5.14.1'"); //item name and item ID are irrelevant of the patch, let's just use 5.14.1
+$result_arr = array(); //current result
+$result_all = array(); //both of the results
 $refpref = 0;
 if(isset($_GET["region_pref"]))
 {
@@ -23,7 +23,7 @@ if($query)
 			$additional = " AND `region` = '$refpref'";
 			if($refpref=="all")
 			{
-				$additional = "";
+				$additional = ""; //if all regions are selected, let's just not filter it
 			}
 			$itemid = $obj->item_id;
 			foreach($exceptions as $e)
@@ -48,7 +48,7 @@ if($query)
 				while($obj2 = $query2->fetch_object())
 				{
 					$reg = $obj2->region;
-					$relevance = 1;
+					$relevance = 1; //relevance is helpful when filtering "all" regions, so we don't simply add all the results together and then divide it by 10 (number of regions), this IS THE PROPER WAY
 					if($additional == "")
 					{
 						if($relevance == 1)
@@ -119,7 +119,7 @@ else
 	echo "Mysql error:".$mysqli->error."<br>";
 }
 
-function divideOrZero($n1, $n2)
+function divideOrZero($n1, $n2) //if the second argument is 0, just return 0 to prevent errors of trying to divide by 0
 {
 	if($n2 != 0)
 	{

@@ -6,8 +6,8 @@ require_once("patchesrecorded.php");
 require_once("regionsrecorded.php");
 require_once("exceptions.php");
 $item_id = 0;
-$result_arr = array();
-$result_all = array();
+$result_arr = array(); //current result
+$result_all = array(); //all the results
 if(isset($_GET["id"]))
 {
 	$item_id = $_GET["id"];
@@ -23,7 +23,7 @@ if(isset($_GET["region_pref"]))
 
 foreach($patchesrecorded as $pr)
 {
-	foreach($exceptions as $e)
+	foreach($exceptions as $e) //the boots' enchantments different item IDs in 5.11 from 5.14 fuck up things, this fixes it
 			{
 				if($e[1] == $item_id && $pr == "5.11.1")
 				{
@@ -55,11 +55,11 @@ foreach($patchesrecorded as $pr)
 		$avgmcount = 0;
 		foreach($regionsrecorded as $rr)
 		{
-		if(($refpref != "all" && $rr[0] == $refpref) || $refpref == "all")
+		if(($refpref != "all" && $rr[0] == $refpref) || $refpref == "all") //region preference, refpref is just a typo and I was too lazy to change it
 		{
 			$reg = $rr[0];
-			$relevance = 1;
-			$additional2 = "";
+			$relevance = 1; //again, relevance is the proper way to figure out the average values, not simply dividing by 10 (number of regions)
+			$additional2 = ""; //let's just not mess with the first $additional var, it would fuck up things
 			if($additional == "")
 			{
 				if($relevance == 1)
@@ -77,7 +77,7 @@ foreach($patchesrecorded as $pr)
 				}
 				
 			}
-			$additional2 = " AND `region` = '$reg'";
+			$additional2 = " AND `region` = '$reg'"; 
 			$query2 = $mysqli->query("SELECT `winrate`, `pickrate`, `avgpurchase`, `medpurchase` FROM `cacheddata` WHERE `patch` = '$pr' AND `item_id` = $item_id$additional2");
 			//echo "SELECT `winrate`, `pickrate`, `avgpurchase`, `medpurchase` FROM `cacheddata` WHERE `patch` = '$pr' AND `item_id` = $item_id$additional2<br>";
 			if($query2)
@@ -133,7 +133,7 @@ foreach($patchesrecorded as $pr)
 }
 //array_push($result_all, $refpref);
 echo json_encode($result_all);
-function divideOrZero($n1, $n2)
+function divideOrZero($n1, $n2) //division by 0 throws errors, this does not
 {
 	if($n2 != 0)
 	{

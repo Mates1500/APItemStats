@@ -18,7 +18,7 @@ foreach($itemsrecorded as $ir)
 			$patch = $pr;
 			$region = $rr[0];
 			$item = $ir[0];
-			if($ir[1] == "both" || $ir[1] == $patch)
+			if($ir[1] == "both" || $ir[1] == $patch) //continue only if the patch is relevant
 			{
 				$query = $mysqli->query("SELECT * FROM `cacheddata` WHERE `item_id` = $item AND `region` = '$region' AND `patch` = '$patch'");
 				if($query)

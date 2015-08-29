@@ -81,23 +81,23 @@
 			 {
 				refpref=$.cookie("region");
 				$("ul.navbar-nav").children().removeClass("active");
-				$("ul.navbar-nav").children("li:contains('"+refpref.toUpperCase()+"')").addClass("active");
+				$("ul.navbar-nav").children("li:contains('"+refpref.toUpperCase()+"')").addClass("active"); //if a cookie exists, unmark all the li's and mark the one equal to the cookie
 			 }
 			 
-				$("ul.navbar-nav > li:not(:contains('Home'))").click(function()
+				$("ul.navbar-nav > li:not(:contains('Home'))").click(function() //oh we want to exclude the home button, this one had me for almost an hour
 				{		
 					$("ul.navbar-nav").children().removeClass("active");
 					$(this).addClass("active");
 					refpref = $(this).text().toLowerCase();
 					$.cookie("region", refpref, {expires:7});
-					$.getJSON('landingpagerequeststats.php?region_pref='+refpref, function(d)
+					$.getJSON('landingpagerequeststats.php?region_pref='+refpref, function(d) //this is what starts all the realtime request magic
 			   {
 				   processJsonData(d, refpref);
 					});;
 				})
 				
 			
-               $.getJSON('landingpagerequeststats.php?region_pref='+refpref, function(d)
+               $.getJSON('landingpagerequeststats.php?region_pref='+refpref, function(d) //the first one called on page load
 			   {
 				   processJsonData(d, refpref);
 			   });
@@ -131,11 +131,11 @@
 					  
 					 
 				  }
-				table.draw(data, {showRowNumber: false, width: '100%', height: '100%', allowHtml: true, sort: 'disable'});  
+				table.draw(data, {showRowNumber: false, width: '100%', height: '100%', allowHtml: true, sort: 'disable'});  //we need to force redrawing the table, or the values won't change
 				//console.log(obj); //for debugging
 		 }
 		 
-		 function secondsTimeSpanToMS(s) {
+		 function secondsTimeSpanToMS(s) { //I stole this one from stackoverflow, because I was way too lazy to think already, but the same function in PHP was written by me, no zero padding there tho
 			var m = Math.floor(s/60); //Get remaining minutes
 			s -= m*60;
 			s = Math.floor(s);

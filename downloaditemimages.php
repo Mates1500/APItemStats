@@ -22,7 +22,7 @@
 			{
 				$irname = $ir[0];
 				$img = "images/$irname.png";
-				if($pr == "5.11.1" && $irname == 3050)
+				if($pr == "5.11.1" && $irname == 3050) //only one exception, let's not make another file just for this
 				{
 					$img = "images/$irname"."_z.png"; //zeke's herald, different icon
 					echo $img."<br>";

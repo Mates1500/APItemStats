@@ -23,7 +23,7 @@ Number of matches for each region, each patch:<input name=\"matches\"><br>
 LAS<input type=\"checkbox\" name=\"las\"> NA<input type=\"checkbox\" name=\"na\"> OCE<input type=\"checkbox\" name=\"oce\"> RU<input type=\"checkbox\" name=\"ru\"> TR<input type=\"checkbox\" name=\"tr\"> <br>
 Select All <input type=\"checkbox\" id=\"select_all\"></span><br>
 <input type=\"submit\" class=\"btn btn-lg btn-primary\">";
-echo "<input type=\"hidden\" name=\"pw\" value=$password></form>";
+echo "<input type=\"hidden\" name=\"pw\" value=$password></form>"; //gotta keep the password saved somewhere and I don't like using sessions
 	}
 	else
 	{

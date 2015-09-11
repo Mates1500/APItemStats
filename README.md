@@ -3,6 +3,8 @@ League of Legends AP Item stats between patch 5.11 and 5.14, includes all sorts 
 
 The main goal of this project was just to make something nice looking for the [Riot API Challenge 2.0](https://developer.riotgames.com/discussion/announcements/show/2lxEyIcE)
 
+The entire project was made just in **4 days**, because I found out about the challenge quite early and thought to myself - naah, I'll do it later. Turns out it was almost the end of August and I was going on vacation to Italy for over a week, so it was quite intense to make the entire thing work in the way it does. It could definitely use way more polish, that's for sure.
+
 The user can switch between all the regions, including an "all" switch, that will output average data of all regions, based on the number of matches in the database of each region.
 
 On the main page, on the first visit, the user is presented with the item results of NA matches, however, the user can switch freely between all the regions, on region switch, AJAX requests the results from another PHP page, therefore **no refresh is required**.

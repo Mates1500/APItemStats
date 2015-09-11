@@ -58,6 +58,12 @@ Go ahead and ask on the issue tracker, currently I'm a little tired from working
 
 Most of the code should be self-explanatory, hopefully. It's mostly just SQL queries over and over again, fetching, manipulating and adding data.
 
+##Known issues I might fix later
+- Code is spaghetti in places (especially updatestats.php)
+- The folder structure sucks, too many files in root folder, file names are way too long sometimes
+- Seeing progress especially in updatestats.php without implicit_flush on is quite hard, I would have to restructure the entire file to make it work in a more feasible way
+- Changing region on item detail doesn't change the parameter in the address bar
+
 ##Third party tools used in this project
 - [Riot Games API](https://developer.riotgames.com/) (you don't say?!)
 - [jQuery](https://jquery.com/) (so working with button events and changing text isn't nearly as painful as vanilla Javascript)

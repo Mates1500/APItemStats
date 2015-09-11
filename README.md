@@ -62,6 +62,7 @@ Most of the code should be self-explanatory, hopefully. It's mostly just SQL que
 
 ##Known issues I might fix later
 - Code is spaghetti in places (especially updatestats.php)
+- Pick rate seems dodgy (quite low), most likely because of the reason above
 - The folder structure sucks, too many files in root folder, file names are way too long sometimes
 - Seeing progress especially in updatestats.php without implicit_flush on is quite hard, I would have to restructure the entire file to make it work in a more feasible way
 - Changing region on item detail doesn't change the parameter in the address bar

@@ -30,7 +30,7 @@
 	<style>
 	.label
 	{
-			
+
 	}
 	</style>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -54,15 +54,15 @@
 		data.addColumn('string', 'Med purchase 5.14');
 		/*for(var i=0; i<=53; i++)
 		{
-			
-			data.addRow(['<span id="img'+i+'"></span>', '<span id="name'+i+'"></span>', 
-			'<span id="wr511_'+i+'"></span>', '<span id="wr514_'+i+'"></span>', 
-			'<span id="pop511_'+i+'"></span>', '<span id="pop514_'+i+'"></span>', 
+
+			data.addRow(['<span id="img'+i+'"></span>', '<span id="name'+i+'"></span>',
+			'<span id="wr511_'+i+'"></span>', '<span id="wr514_'+i+'"></span>',
+			'<span id="pop511_'+i+'"></span>', '<span id="pop514_'+i+'"></span>',
 			'<span id="avg511_'+i+'"></span>', '<span id="avg514_'+i+'"></span>', '<span id="med511_'+i+'"></span>', '<span id="med514_'+i+'"></span>']);
 		}*/
 		data.addRows(54);
        /* data.addRows([
-		
+
           ['Mike',  {v: 10000, f: '$10,000'}, true],
           ['Jim',   {v:8000,   f: '$8,000'},  false],
           ['Alice', {v: 12500, f: '$12,500'}, true],
@@ -76,16 +76,21 @@
 	<script type="text/javascript" language="javascript">
          $(document).ready(function() {
 			 var refpref = $("ul.navbar-nav > li.active").text().toLowerCase();
-			 
+
+			 if($.cookie("region") == null)
+			 {
+				 $.cookie("region", refpref, {expires:7});
+			 }
+
 			 if($.cookie("region") != null)
 			 {
 				refpref=$.cookie("region");
 				$("ul.navbar-nav").children().removeClass("active");
 				$("ul.navbar-nav").children("li:contains('"+refpref.toUpperCase()+"')").addClass("active"); //if a cookie exists, unmark all the li's and mark the one equal to the cookie
 			 }
-			 
+
 				$("ul.navbar-nav > li:not(:contains('Home'))").click(function() //oh we want to exclude the home button, this one had me for almost an hour
-				{		
+				{
 					$("ul.navbar-nav").children().removeClass("active");
 					$(this).addClass("active");
 					refpref = $(this).text().toLowerCase();
@@ -95,14 +100,14 @@
 				   processJsonData(d, refpref);
 					});;
 				})
-				
-			
+
+
                $.getJSON('landingpagerequeststats.php?region_pref='+refpref, function(d) //the first one called on page load
 			   {
 				   processJsonData(d, refpref);
 			   });
-			   
-			  
+
+
          });
 		 function processJsonData(obj, refpref)
 		 {
@@ -128,13 +133,13 @@
 						data.setCell(itemindex, 9, secondsTimeSpanToMS(obj[i].medpurchase/1000));
 						itemindex++;
 						}
-					  
-					 
+
+
 				  }
 				table.draw(data, {showRowNumber: false, width: '100%', height: '100%', allowHtml: true, sort: 'disable'});  //we need to force redrawing the table, or the values won't change
 				//console.log(obj); //for debugging
 		 }
-		 
+
 		 function secondsTimeSpanToMS(s) { //I stole this one from stackoverflow, because I was way too lazy to think already, but the same function in PHP was written by me, no zero padding there tho
 			var m = Math.floor(s/60); //Get remaining minutes
 			s -= m*60;

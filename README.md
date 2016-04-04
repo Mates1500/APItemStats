@@ -57,7 +57,7 @@ output_buffering = off
 
 ##Questions?
 
-The **code is BAD**, I know that, it was a rushed project a few days before the end of the API challenge, and I probably won't be returning to this in the future, check out my portfolio for my other projects with way better OOP structure. It's a procedurally programmed one-use mess.
+The **code is BAD**, I know that, it was a rushed project a few days before the end of the API challenge, and I probably won't be returning to this in the future, check out my portfolio for my other projects with way better OOP structure. This is just a procedurally programmed one-use mess.
 
 Go ahead and ask on the issue tracker, currently I'm a little tired from working on this project for 4 days straight, so the project description might not be complete yet.
 
